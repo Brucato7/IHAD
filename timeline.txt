@@ -1,0 +1,20 @@
+dCC Capstone 'IHAD' Project Timeline
+-Monday 7/25
+    Setup GitHub Repo
+    Setup initial file structure
+    Work on facebook login
+-Tuesday 7/26
+    Work on user page
+    Work on Goal Creation
+    Badge creation and activation
+-Wednesday 7/27
+    work on user search
+    work on matching users based on goal.
+-Thursday 7/28
+    make it prettier
+    refine
+-Friday 7/29
+    Catch up and refine
+-Monday 8/1
+    Last minute fixes
+    Prepare for presentation
