@@ -4,3 +4,4 @@ database-manager.js
 /public/css/normalize.css
 /public/angular.min.js
 /public/angular_mock.js
+/public/angular-route.min.js

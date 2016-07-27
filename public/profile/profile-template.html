@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">IHAD</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row" style="background-color: #123456; color: #fff;">
+        <div>
+            <h3><img ng-src="{{profilePic()}}"> {{name()}}</h3>
+            <hr>
+   	    </div>
+        <div class="col-sm-2">
+            <h4 ng-click="setMinMaxStartDate(); showGoalForm = !showGoalForm;">Create New Goal <span ng-show="!showGoalForm" class="glyphicon glyphicon-menu-down"></span><span ng-show="showGoalForm" class="glyphicon glyphicon-menu-up"></span></h4>
+            <div ng-show="showGoalForm">
+                <form role="form" ng-submit="saveGoal()">
+                    <div class="form-group">
+                        <label for="title">Goal Title:</label>
+                        <input id="title" ng-model='title'' type="text" class="form-control" placeholder="What is your goal?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="goal">Goal Description:</label>
+                        <input id="goal" ng-model='goal' type="text" class="form-control" placeholder="What is your goal?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date:</label>
+                        <input id="startDate" type="date" ng-model='startDate' class="form-control" placeholder="yyyy-MM-dd" min='{{minStartDate}}' max='{{maxStartDate}}' required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Months">Number of Months:</label>
+                        <select id="months" class="form-control" ng-model="months" required>
+                            <option ng-repeat="month in ['1','2','3','4','5','6','7','8','9','10','11','12']">{{month}}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-default">Create Goal</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-8 text-center">
+            <h2>Current Goal:</h2>
+            <p>Goal service two-way binding</p>
+        </div>
+        <div class="col-sm-2">
+            <p>You have checked in lots!</p>
+            <p>Longest streak:</p>
+            <p>Current Streak:</p>
+            <h6>Badges</h6>
+            <ul>
+                <li>Badge 1</li>
+                <li>Badge 2</li>
+            </ul>
+        </div>
+    </div>
+</div>

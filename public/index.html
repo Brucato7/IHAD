@@ -10,15 +10,32 @@
     <title>IHAD | One Hour a Day</title>
     <link href="css/normalize.css" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-</head>
-<body>
 
-    <h1>if IHAD one hour a day</h1>
+</head>
+<body ng-app="ihadApp">
+     
+
+<div>
+    <div ng-view></div>
+</div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="angular.min.js"></script>
 	<script type="text/javascript" src="angular-mock.js"></script>
+    <script type="text/javascript" src="angular-route.min.js"></script>
+    
+    <script type="text/javascript" src="login/login-module.js"></script>
+    <script type="text/javascript" src="login/login-component.js"></script>
+    <script type="text/javascript" src="home/home-module.js"></script>
+    <script type="text/javascript" src="home/home-component.js"></script>
+    <script type="text/javascript" src="profile/profile-module.js"></script>
+    <script type="text/javascript" src="profile/profile-component.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app.routes.js"></script>
+    <script type="text/javascript" src="../userData-service.js"></script>
+    <script type="text/javascript" src="../date-service.js"></script
+    
 </body>
 </html>
