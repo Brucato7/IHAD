@@ -1,9 +1,9 @@
 "use strict";
-angular.module('ihadLogin')
+angular.module('ihadApp')
     .component('login',{
         templateUrl: 'login/login-template.html',
-        controller: ['$scope', '$http', 'userData','$location',
-            function($scope, $http, userData, $location){
+        controller: ['$scope', '$http', 'userData','$location','goalService',
+            function($scope, $http, userData, $location, goalService){
                 var ctrl = this;
                 this.loginError = '';
                 this.username = '';
@@ -32,9 +32,7 @@ angular.module('ihadLogin')
                     }).then(function successCallback(data){
                         if(data.data.rowCount > 0){
                             userData.id = data.data.rows[0].id;
-                            console.log(userData.name);
-                            console.log(userData.id);
-                            console.log(userData.picURL);
+                            goalService.getUserGoals(userData.id);
                             $location.url('/profile');
                         } else {
                             ctrl.saveProfile(name, fbID);
@@ -51,9 +49,7 @@ angular.module('ihadLogin')
                         params: {name: name, fb_id: fbID}
                     }).then(function successCallback(data){
                         userData.id = data.data.rows[0].id;
-                        console.log(userData.name);
-                        console.log(userData.id);
-                        console.log(userData.picURL);
+                        goalService.getUserGoals(userData.id);
                         $location.url('/profile');
                     },function errorCallback(error){
                         console.log(error);

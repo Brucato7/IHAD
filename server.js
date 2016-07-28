@@ -24,13 +24,18 @@ app.route('/login')
 
 app.route('/goal')
 	.post(function(request, response){
-		console.log("Server got it");
 		database.saveGoal(
 			request.query.name,
 			request.query.description,
 			request.query.start_date,
 			request.query.end_date,
 			request.query.achiever_id,
+			function(result){
+				response.send(result);
+			})
+	})
+	.get(function(request, response){
+		database.getAchieverGoals(request.query.achiever_id,
 			function(result){
 				response.send(result);
 			})

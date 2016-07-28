@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         <label for="startDate">Start Date:</label>
-                        <input id="startDate" type="date" ng-model='startDate' class="form-control" placeholder="yyyy-MM-dd" min='{{minStartDate}}' max='{{maxStartDate}}' required>
+                        <input id="startDate" type="date" ng-model='startDate' class="form-control" placeholder="yyyy-MM-dd" min='{{currentDate}}' max='{{maxStartDate}}' required>
                     </div>
                     <div class="form-group">
                         <label for="Months">Number of Months:</label>
@@ -38,9 +38,22 @@
                 </form>
             </div>
         </div>
-        <div class="col-sm-8 text-center">
-            <h2>Current Goal:</h2>
-            <p>Goal service two-way binding</p>
+        <div class="col-sm-8 text-center" style="background-color: #fff; color: #123456;">
+            <div class="row">
+                <div ng-repeat="goal in currentGoal()" class="col-sm-12">
+                    <h1>I'm going to spend an hour a day on {{goal.name}}</h1>
+                    <h3>{{goal.description}}</h3>
+                    <button class="btn btn-primary">I completed my hour today!</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-8 text-left">
+                    <h4>Future Goals</h4>
+                    <div ng-repeat="goal in userGoals() | futureGoals">
+                        <p><strong>{{goal.name}}</strong>: {{goal.description}} <span>Starts: {{goal.start_date | date:shortDate}}</span></p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-sm-2">
             <p>You have checked in lots!</p>

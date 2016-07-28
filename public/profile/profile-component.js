@@ -1,15 +1,17 @@
 "use strict";
 
-angular.module('ihadProfile')
+angular.module('ihadApp')
     .component("profile", {
         templateUrl: "profile/profile-template.html",
-        controller: ['userData','$scope', 'dateService','$http',
-            function(userData, $scope, dateService, $http){
+        controller: ['userData','$scope', 'dateService','$http','goalService','$filter',
+            function(userData, $scope, dateService, $http, goalService, $filter){
+                $scope.userGoals = function(){return goalService.userGoalsArray;};
+                $scope.currentGoal = function(){return goalService.currentGoal;};
                 $scope.title;
                 $scope.goal;
                 $scope.startDate;
                 $scope.months = "1";
-                $scope.minStartDate = dateService.yyyymmddDateFormat(0,0);
+                $scope.currentDate = dateService.yyyymmddDateFormat(0,0);
                 $scope.maxStartDate = dateService.yyyymmddDateFormat(1,0);
                 $scope.profilePic = function(){return userData.picURL};
                 $scope.name = function(){return userData.name};
@@ -39,5 +41,13 @@ angular.module('ihadProfile')
                     })
 
                 };
-            }]
+
+                $scope.test = function(){
+                    console.log(goalService.userGoalsArray);
+                    console.log(goalService.currentGoal);
+                    console.log($scope.userGoals());
+                    console.log($scope.currentGoal());
+                }
+            }
+        ]
     });

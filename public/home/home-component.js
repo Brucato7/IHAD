@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("ihadHome")
+angular.module("ihadApp")
     .component('home',{
         templateUrl: 'home/home-template.html',
         controller: ['$scope',

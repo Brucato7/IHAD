@@ -1,5 +1,5 @@
 "use srtrict"
-angular.module('ihadApp', ['ngRoute','ihadHome','ihadProfile']);
+angular.module('ihadApp', ['ngRoute']);
 
 window.fbAsyncInit = function() {
     FB.init({
