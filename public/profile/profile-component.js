@@ -3,11 +3,9 @@
 angular.module('ihadApp')
     .component("profile", {
         templateUrl: "profile/profile-template.html",
-        controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService',
-            function(userData, $scope, dateService, $http, goalService, $filter, checkInService){
-                $scope.currentCheckInStreak = function(){ return checkInService.currentStreak;};
-                $scope.longestCheckInStreak = function(){ return checkInService.longestStreak;};
-                $scope.currentCheckIns = function(){return checkInService.currentCheckIns;};
+        controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location',
+            function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location){
+                $scope.checkInService = checkInService;
                 $scope.userGoals = function(){return goalService.userGoalsArray;};
                 $scope.currentGoal = function(){return goalService.currentGoal;};
                 $scope.title;
@@ -53,11 +51,15 @@ angular.module('ihadApp')
                         url: '/checkin',
                         params: {day: date, goal_id: goal_id}
                     }).then(function successCallback(data){
-                        console.log(data);
+                        checkInService.currentCheckIns.push(data.data.rows[0]);
+                        checkInService.currentCheckIns = $filter('orderBy')(checkInService.currentCheckIns, '-day');
+                        checkInService.currentStreak = checkInService.calculateStreakByEndDate(checkInService.currentCheckIns[0].day, 0);
+                        checkInService.findLongestStreak();
+                        checkInService.hideCheckInBtn = checkInService.displayCheckInBtn();
                     }, function errorCallback(error){
                         console.log(error);
                     })
                 };
-              }
+            }
         ]
     });

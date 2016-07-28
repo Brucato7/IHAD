@@ -43,7 +43,8 @@
                 <div ng-repeat="goal in currentGoal()" class="col-sm-12">
                     <h1>I'm going to spend an hour a day on {{goal.name}}</h1>
                     <h3>{{goal.description}}</h3>
-                    <button class="btn btn-primary" ng-click="saveCheckIn()">I completed my hour today!</button>
+                    <button class="btn btn-primary" ng-click="saveCheckIn()" ng-hide="checkInService.hideCheckInBtn">I completed my hour today!</button>
+                    <buttun class="btn btn-success" ng-click="test()" ng-show="checkInService.hideCheckInBtn">Today's hour is already done!</button>
                 </div>
             </div>
             <div class="row">
@@ -56,9 +57,9 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <p><strong>Last Check In</strong>: {{currentCheckIns()[0].day | date: shortDate}}</p>
-            <p><strong>Longest streak</strong>: {{longestCheckInStreak().length}} Days</p>
-            <p><strong>Current Streak</strong>: {{currentCheckInStreak().length}} Days</p>
+            <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date: shortDate}}</p>
+            <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
+            <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ angular.module('ihadApp')
         this.currentCheckIns = [];
         this.longestStreak = [];
         this.currentStreak = [];
+        this.hideCheckInBtn;
 
         this.getCheckIns = function(goal_id){
             $http({
@@ -19,9 +20,22 @@ angular.module('ihadApp')
                 checkin.currentCheckIns = $filter('orderBy')(checkin.currentCheckIns, '-day');
                 checkin.currentStreak = checkin.calculateStreakByEndDate(checkin.currentCheckIns[0].day, 0);
                 checkin.findLongestStreak();
+                checkin.hideCheckInBtn = checkin.displayCheckInBtn();
             }, function errorCallback(error){
                 console.log(error);
             })
+        };
+
+        this.displayCheckInBtn = function(){
+            var today = $filter('date')(dateService.yyyymmddDateFormat(0,0), 'shortDate');
+            var lastCheckInDate = $filter('date')(this.currentCheckIns[0].day, 'shortDate');
+            console.log(today);
+            console.log(lastCheckInDate);
+            if(today === lastCheckInDate){
+                return true;
+            } else {
+                return false;
+            }
         };
         
         this.calculateStreakByEndDate = function(dateString,startingIndex){
@@ -86,5 +100,5 @@ angular.module('ihadApp')
             }
         };
 
-        
+
     })
