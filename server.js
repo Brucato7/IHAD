@@ -40,3 +40,17 @@ app.route('/goal')
 				response.send(result);
 			})
 	});
+
+app.route('/checkin')
+	.get(function(request, response){
+		database.getDayChecksByGoal(request.query.goal_id,
+			function(result){
+				response.send(result);
+			})
+	})
+	.post(function(request, response){
+		database.saveDayCheck(request.query.day, request.query.goal_id,
+			function(result){
+				response.send(result);
+			})
+	});

@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('ihadApp')
-    .service('goalService', function($http, dateService){
+    .service('goalService', function($http, dateService, checkInService){
         var goal = this;
         this.currentGoal = [];
         this.userGoalsArray;
@@ -25,5 +25,6 @@ angular.module('ihadApp')
                    this.currentGoal.push(this.userGoalsArray[i]);
                 }
             }
+            checkInService.getCheckIns(this.currentGoal[0].id);
         }
     });

@@ -3,8 +3,11 @@
 angular.module('ihadApp')
     .component("profile", {
         templateUrl: "profile/profile-template.html",
-        controller: ['userData','$scope', 'dateService','$http','goalService','$filter',
-            function(userData, $scope, dateService, $http, goalService, $filter){
+        controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService',
+            function(userData, $scope, dateService, $http, goalService, $filter, checkInService){
+                $scope.currentCheckInStreak = function(){ return checkInService.currentStreak;};
+                $scope.longestCheckInStreak = function(){ return checkInService.longestStreak;};
+                $scope.currentCheckIns = function(){return checkInService.currentCheckIns;};
                 $scope.userGoals = function(){return goalService.userGoalsArray;};
                 $scope.currentGoal = function(){return goalService.currentGoal;};
                 $scope.title;
@@ -42,12 +45,19 @@ angular.module('ihadApp')
 
                 };
 
-                $scope.test = function(){
-                    console.log(goalService.userGoalsArray);
-                    console.log(goalService.currentGoal);
-                    console.log($scope.userGoals());
-                    console.log($scope.currentGoal());
-                }
-            }
+                $scope.saveCheckIn = function(){
+                    var date = dateService.yyyymmddDateFormat(0,0);
+                    var goal_id = goalService.currentGoal[0].id;
+                    $http({
+                        method: 'POST',
+                        url: '/checkin',
+                        params: {day: date, goal_id: goal_id}
+                    }).then(function successCallback(data){
+                        console.log(data);
+                    }, function errorCallback(error){
+                        console.log(error);
+                    })
+                };
+              }
         ]
     });
