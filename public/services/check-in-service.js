@@ -29,8 +29,6 @@ angular.module('ihadApp')
         this.displayCheckInBtn = function(){
             var today = $filter('date')(dateService.yyyymmddDateFormat(0,0), 'shortDate');
             var lastCheckInDate = $filter('date')(this.currentCheckIns[0].day, 'shortDate');
-            console.log(today);
-            console.log(lastCheckInDate);
             if(today === lastCheckInDate){
                 return true;
             } else {

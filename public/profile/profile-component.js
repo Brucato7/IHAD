@@ -6,8 +6,7 @@ angular.module('ihadApp')
         controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location',
             function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location){
                 $scope.checkInService = checkInService;
-                $scope.userGoals = function(){return goalService.userGoalsArray;};
-                $scope.currentGoal = function(){return goalService.currentGoal;};
+                $scope.goalService = goalService;
                 $scope.title;
                 $scope.goal;
                 $scope.startDate;
@@ -17,6 +16,8 @@ angular.module('ihadApp')
                 $scope.profilePic = function(){return userData.picURL};
                 $scope.name = function(){return userData.name};
                 $scope.showGoalForm = false;
+                $scope.goalTimeError = '';
+
                 $scope.toggleGoalForm = function(){
                     $scope.showGoalForm = !$scope.showGoalForm;
                 };
@@ -24,6 +25,9 @@ angular.module('ihadApp')
                 $scope.saveGoal = function(){
                     var start = dateService.yyyymmddDateFormat(0,0,$scope.startDate);
                     var end = dateService.yyyymmddDateFormat(0,$scope.months,$scope.startDate);
+                    $scope.goalTimeError = '';
+
+                    if(goalService.verifyNoGoalTimeOverlap(start, end)){
 
                     $http({
                         method: 'POST',
@@ -36,10 +40,14 @@ angular.module('ihadApp')
                             achiever_id: userData.id
                         }
                     }).then(function successCallback(data){
-                        console.log(data);
+                        goalService.userGoalsArray.push(data.data.rows[0]);
                     }, function errorCallback(error){
                         console.log(error);
                     })
+
+                    } else {
+                        $scope.goalTimeError = 'You can only have one goal at a time.';
+                    }
 
                 };
 

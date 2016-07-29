@@ -34,30 +34,31 @@
                             <option ng-repeat="month in ['1','2','3','4','5','6','7','8','9','10','11','12']">{{month}}</option>
                         </select>
                     </div>
+                    <span class="text-danger">{{goalTimeError}}</span>
                     <button type="submit" class="btn btn-default">Create Goal</button>
                 </form>
             </div>
         </div>
         <div class="col-sm-8 text-center" style="background-color: #fff; color: #123456;">
             <div class="row">
-                <div ng-repeat="goal in currentGoal()" class="col-sm-12">
+                <div ng-repeat="goal in goalService.currentGoal" class="col-sm-12">
                     <h1>I'm going to spend an hour a day on {{goal.name}}</h1>
                     <h3>{{goal.description}}</h3>
                     <button class="btn btn-primary" ng-click="saveCheckIn()" ng-hide="checkInService.hideCheckInBtn">I completed my hour today!</button>
-                    <buttun class="btn btn-success" ng-click="test()" ng-show="checkInService.hideCheckInBtn">Today's hour is already done!</button>
+                    <buttun class="btn btn-success" ng-show="checkInService.hideCheckInBtn">Today's hour is already done!</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-8 text-left">
                     <h4>Future Goals</h4>
-                    <div ng-repeat="goal in userGoals() | futureGoals">
-                        <p><strong>{{goal.name}}</strong>: {{goal.description}} <span>Starts: {{goal.start_date | date:shortDate}}</span></p>
+                    <div ng-repeat="goal in goalService.userGoalsArray | futureGoals">
+                        <p><strong>{{goal.name}}</strong>: {{goal.description}} <span>Starts: {{goal.start_date | date}}</span></p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-2">
-            <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date: shortDate}}</p>
+            <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date}}</p>
             <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
             <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
         </div>

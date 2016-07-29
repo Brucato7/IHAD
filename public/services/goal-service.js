@@ -1,10 +1,12 @@
 "use strict";
 
 angular.module('ihadApp')
-    .service('goalService', function($http, dateService, checkInService){
+    .service('goalService', function($http, dateService, checkInService, $filter){
         var goal = this;
         this.currentGoal = [];
         this.userGoalsArray;
+
+
         this.getUserGoals = function(userID){
             $http({
                 method: 'GET',
@@ -17,6 +19,8 @@ angular.module('ihadApp')
                 console.log(error);
             })
         };
+
+
         this.getCurrentGoal = function(){
             var currentDate = dateService.yyyymmddDateFormat(0,0);
             
@@ -26,5 +30,28 @@ angular.module('ihadApp')
                 }
             }
             checkInService.getCheckIns(this.currentGoal[0].id);
+        };
+
+
+        this.verifyNoGoalTimeOverlap = function(start, end){     
+
+            for(var i = 0; i < this.userGoalsArray.length; i++){
+
+                var goal_start = dateService.yyyymmddDateFormat(0,0,this.userGoalsArray[i].start_date);
+                var goal_end = dateService.yyyymmddDateFormat(0,0,this.userGoalsArray[i].end_date);
+
+                if(start >= goal_start && start <= goal_end){
+                   //this goal overlaps time goal[i]
+                   return false;
+                } else {
+                    if(end >= goal_start && end <= goal_end){
+                        //this goal overlaps time goal[i]
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
+
+
     });
