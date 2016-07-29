@@ -6,12 +6,17 @@
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row" style="background-color: #123456; color: #fff;">
-        <div>
+        <div class="col-sm-10">
             <h3><img ng-src="{{profilePic()}}"> {{name()}}</h3>
-            <hr>
    	    </div>
+        <div class="col-sm-2">
+            <button ng-click='logout()' class="btn btn-default">Log Out</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="background-color: #123456; color: #fff;">
         <div class="col-sm-2">
             <h4 ng-click="setMinMaxStartDate(); showGoalForm = !showGoalForm;">Create New Goal <span ng-show="!showGoalForm" class="glyphicon glyphicon-menu-down"></span><span ng-show="showGoalForm" class="glyphicon glyphicon-menu-up"></span></h4>
             <div ng-show="showGoalForm">
@@ -22,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="goal">Goal Description:</label>
-                        <input id="goal" ng-model='goal' type="text" class="form-control" placeholder="What is your goal?" required>
+                        <textarea id="goal" ng-model='goal' type="text" class="form-control" rows="4" maxlength="120" placeholder="What is your goal?" style="resize: none;" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="startDate">Start Date:</label>
@@ -34,25 +39,25 @@
                             <option ng-repeat="month in ['1','2','3','4','5','6','7','8','9','10','11','12']">{{month}}</option>
                         </select>
                     </div>
-                    <span class="text-danger">{{goalTimeError}}</span>
+                    <p class="text-danger"><strong>{{goalTimeError}}</strong></p>
                     <button type="submit" class="btn btn-default">Create Goal</button>
                 </form>
             </div>
         </div>
-        <div class="col-sm-8 text-center" style="background-color: #fff; color: #123456;">
+        <div class="col-sm-8 text-center" style="background-color: #fff; color: #123456; height: 440px;">
             <div class="row">
                 <div ng-repeat="goal in goalService.currentGoal" class="col-sm-12">
                     <h1>I'm going to spend an hour a day on {{goal.name}}</h1>
                     <h3>{{goal.description}}</h3>
-                    <button class="btn btn-primary" ng-click="saveCheckIn()" ng-hide="checkInService.hideCheckInBtn">I completed my hour today!</button>
-                    <buttun class="btn btn-success" ng-show="checkInService.hideCheckInBtn">Today's hour is already done!</button>
+                    <button class="btn btn-primary" ng-click="saveCheckIn()" ng-hide="checkInService.hideCheckInBtn">Confirm your hour for today!</button>
+                    <h4 class="text-success" ng-show="checkInService.hideCheckInBtn">Today's hour is already complete!</h4>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-offset-2 col-sm-8 text-left">
                     <h4>Future Goals</h4>
                     <div ng-repeat="goal in goalService.userGoalsArray | futureGoals">
-                        <p><strong>{{goal.name}}</strong>: {{goal.description}} <span>Starts: {{goal.start_date | date}}</span></p>
+                        <p><strong>{{goal.name}}</strong>: {{goal.description}} <span><strong>Starts</strong>: {{goal.start_date | date}}</span></p>
                     </div>
                 </div>
             </div>
@@ -61,6 +66,10 @@
             <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date}}</p>
             <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
             <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
+        </div>
+    </div>
+    <div class="row" style="background-color: #123456; color: #fff;">
+        <div class="col-sm-12" style="height: 15px;">
         </div>
     </div>
 </div>

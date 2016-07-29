@@ -22,10 +22,15 @@ angular.module('ihadApp')
 
 
         this.getCurrentGoal = function(){
+            this.currentGoal = [];
             var currentDate = dateService.yyyymmddDateFormat(0,0);
-            
+                       
             for(var i = 0; i < this.userGoalsArray.length; i++){
-                if(currentDate >= this.userGoalsArray[i].start_date && currentDate <= this.userGoalsArray[i].end_date){
+
+                var goal_start = dateService.yyyymmddDateFormat(0,0,this.userGoalsArray[i].start_date);
+                var goal_end = dateService.yyyymmddDateFormat(0,0,this.userGoalsArray[i].end_date);
+
+                if(currentDate >= goal_start && currentDate <= goal_end){
                    this.currentGoal.push(this.userGoalsArray[i]);
                 }
             }

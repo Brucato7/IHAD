@@ -3,8 +3,8 @@
 angular.module('ihadApp')
     .component("profile", {
         templateUrl: "profile/profile-template.html",
-        controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location',
-            function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location){
+        controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location','$window',
+            function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location,$window){
                 $scope.checkInService = checkInService;
                 $scope.goalService = goalService;
                 $scope.title;
@@ -41,12 +41,18 @@ angular.module('ihadApp')
                         }
                     }).then(function successCallback(data){
                         goalService.userGoalsArray.push(data.data.rows[0]);
+                        goalService.getCurrentGoal();
+                        $scope.title = '';
+                        $scope.goal = '';
+                        $scope.startDate = '';
+                        $scope.months = "1";
+                        $scope.toggleGoalForm();
                     }, function errorCallback(error){
                         console.log(error);
                     })
 
                     } else {
-                        $scope.goalTimeError = 'You can only have one goal at a time.';
+                        $scope.goalTimeError = 'Error: You can only have one goal at a time.';
                     }
 
                 };
@@ -68,6 +74,15 @@ angular.module('ihadApp')
                         console.log(error);
                     })
                 };
+
+                $scope.logout = function(){
+                    FB.logout(function(response) {
+                        alert('You are now logged out!');
+                    });
+                    
+                    $location.url('/');
+                    $window.location.reload();
+                }
             }
         ]
     });

@@ -8,6 +8,9 @@ angular.module('ihadApp')
             .when('/profile',{
                 template: '<profile></profile>'
             })
+            .when('/search', {
+                template: '<search></search>'
+            })
             .otherwise('/', {
                 template: '<home></home>'
             });
