@@ -3,8 +3,9 @@
 angular.module('ihadApp')
     .component('search', {
         templateUrl: 'search/search-template.html',
-        controller:  ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location','$window',
-            function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location,$window){
+        controller:  ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location','$window','viewProfileService',
+            function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location,$window,viewProfileService){
+                $scope.viewProfile = viewProfileService;
                 $scope.checkInService = checkInService;
                 $scope.goalService = goalService;
                 $scope.user = userData;

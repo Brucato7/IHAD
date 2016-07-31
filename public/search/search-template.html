@@ -21,7 +21,7 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row"  style='background-color: #68C9C9;'>
+    <div class="row"  style='background-color: #36B0FF;'>
         <div class="col-sm-2">
         </div>
 
@@ -81,8 +81,8 @@
                         </tr>
 
                         <tr ng-repeat="goal in getGoalView() | filter:search | orderBy: sortBy">
-                            <td><a href="/search"><img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square"></a></td>
-                            <td><a href="/search">{{goal.name}}</a></td>
+                            <td><a ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)"><img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square"></a></td>
+                            <td><a ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)">{{goal.name}}</a></td>
                             <td>{{goal.title}}</td>
                             <td>{{goal.description | limitTo: 25}}</td>
                             <td>{{goal.start_date | date}}</td>

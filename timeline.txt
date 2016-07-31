@@ -18,3 +18,6 @@ dCC Capstone 'IHAD' Project Timeline
 -Monday 8/1
     Last minute fixes
     Prepare for presentation
+
+
+    https://coolors.co/22343f-ffffff-a5dbff-36b0ff-ffa12a

@@ -11,6 +11,9 @@ angular.module('ihadApp')
             .when('/search', {
                 template: '<search></search>'
             })
+            .when('/profile/:fb_id', {
+                template: '<profile></profile>'
+            })
             .otherwise('/', {
                 template: '<home></home>'
             });
