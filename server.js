@@ -54,3 +54,11 @@ app.route('/checkin')
 				response.send(result);
 			})
 	});
+
+app.route('/searchgoals')
+	.get(function(request, response){
+		database.getAllGoals(
+			function(result){
+				response.send(result);
+			})
+	});

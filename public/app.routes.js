@@ -5,8 +5,8 @@ angular.module('ihadApp')
             .when("/", {
                 template: '<home></home>'
             })
-            .when('/profile',{
-                template: '<profile></profile>'
+            .when('/activeuser',{
+                template: '<activeuser></activeuser>'
             })
             .when('/search', {
                 template: '<search></search>'

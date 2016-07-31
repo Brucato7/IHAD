@@ -1,1 +1,99 @@
-<h1>HELLO SEARCH PAGE!!!!!</h1>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">IHAD</a>
+    </div>
+
+    <ul class="nav navbar-nav">
+        <li><a href="#/search">Search</a></li>
+        <li><a href="#/activeuser">My Profile</a></li>
+        <li><a href="#/about">About</a></li>
+    </ul>
+    
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="#/activeuser">{{user.name}}</a></li>
+        <li><img ng-src="{{user.picURL}}"></li>
+        <li><a href="" ng-click="logout()">Log Out</a></li>
+    </ul>
+    
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row"  style='background-color: #68C9C9;'>
+        <div class="col-sm-2">
+        </div>
+
+        <div class="col-sm-8" style='background-color: #fff; height: 500px'>
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-4">
+                    <label for="search">Search: </label>
+                    <input type="text" id="search" class="form-control" ng-model="search.$" placeholder="Search" ng-show="searchByAll">
+                    <input type="text" id="search" class="form-control" ng-model="search.name" placeholder="Search by Name" ng-show="searchByName">
+                    <input type="text" id="search" class="form-control" ng-model="search.title" placeholder="Search by Goal" ng-show="searchByGoal">
+                    <input type="text" id="search" class="form-control" ng-model="search.description" placeholder="Search by Description" ng-show="searchByDescription">
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="searchBy">Search By:</label>
+                    <select id="searchBy" ng-model="searchBy" class="form-control" ng-change="showSearchBy()">
+                        <option value="all">All</option>
+                        <option value="name">Name</option>
+                        <option value="goal">Goal</option>
+                        <option value="description">Description</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="sortBy">Sort By:</label>
+                    <select id="sortBy" ng-model="sortBy" class="form-control">
+                        <option value="start_date">Start Date: Earliest</option>
+                        <option value="-start_date">Start Date: Latest</option>
+                        <option value="name">Name: A-Z</option>
+                        <option value="-name">Name: Z-A</option>
+                        <option value="title">Goal: A-Z</option>
+                        <option value="-title">Goal: Z-A</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-2">
+                    <label for="viewGoals">View:</label>
+                    <select id="viewGoals" ng-model="viewGoals" class="form-control">
+                        <option value="">All Goals</option>
+                        <option value='past'>Past Goals</option>
+                        <option value='present'>Present Goals</option>
+                        <option value='future'>Future Goals</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <h4>Results</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Pic</th>
+                            <th>Name</th>
+                            <th>Goal</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                        </tr>
+
+                        <tr ng-repeat="goal in getGoalView() | filter:search | orderBy: sortBy">
+                            <td><a href="/search"><img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square"></a></td>
+                            <td><a href="/search">{{goal.name}}</a></td>
+                            <td>{{goal.title}}</td>
+                            <td>{{goal.description | limitTo: 25}}</td>
+                            <td>{{goal.start_date | date}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>            
+        </div>
+
+        <div class="col-sm-2">
+        </div>
+    </div>    
+</div>
+

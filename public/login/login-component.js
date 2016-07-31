@@ -33,7 +33,7 @@ angular.module('ihadApp')
                         if(data.data.rowCount > 0){
                             userData.id = data.data.rows[0].id;
                             goalService.getUserGoals(userData.id);
-                            $location.url('/profile');
+                            $location.url('/activeuser');
                         } else {
                             ctrl.saveProfile(name, fbID);
                         }
@@ -50,7 +50,7 @@ angular.module('ihadApp')
                     }).then(function successCallback(data){
                         userData.id = data.data.rows[0].id;
                         goalService.getUserGoals(userData.id);
-                        $location.url('/profile');
+                        $location.url('/activeuser');
                     },function errorCallback(error){
                         console.log(error);
                     })

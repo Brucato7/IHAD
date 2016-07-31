@@ -9,6 +9,11 @@ angular.module('ihadApp')
         this.hideCheckInBtn;
 
         this.getCheckIns = function(goal_id){
+            
+            this.currentCheckIns = [];
+            this.longestStreak = [];
+            this.currentStreak = [];
+
             $http({
                 method: 'GET',
                 url: '/checkin',

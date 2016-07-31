@@ -1,20 +1,19 @@
 "use strict";
 
 angular.module('ihadApp')
-    .component("profile", {
-        templateUrl: "profile/profile-template.html",
+    .component("activeuser", {
+        templateUrl: "active-user/active-user-template.html",
         controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location','$window',
             function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location,$window){
                 $scope.checkInService = checkInService;
                 $scope.goalService = goalService;
+                $scope.user = userData;
                 $scope.title;
                 $scope.goal;
                 $scope.startDate;
                 $scope.months = "1";
                 $scope.currentDate = dateService.yyyymmddDateFormat(0,0);
-                $scope.maxStartDate = dateService.yyyymmddDateFormat(1,0);
-                $scope.profilePic = function(){return userData.picURL};
-                $scope.name = function(){return userData.name};
+                $scope.maxStartDate = dateService.yyyymmddDateFormat(1,0);                
                 $scope.showGoalForm = false;
                 $scope.goalTimeError = '';
 
