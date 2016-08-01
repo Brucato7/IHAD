@@ -4,7 +4,8 @@ angular.module('ihadApp')
     .service('goalService', function($http, dateService, checkInService, $filter){
         var goal = this;
         this.currentGoal = [];
-        this.userGoalsArray;
+        this.userGoalsArray = [];
+        this.partnersGoals = [];
 
 
         this.getUserGoals = function(userID){
@@ -56,7 +57,19 @@ angular.module('ihadApp')
                 }
             }
             return true;
-        }
+        };
+
+        this.getPartnersGoals = function(user_id){
+            $http({
+                mehtod: 'GET',
+                url: '/encourage',
+                params: {accountability_id: user_id}
+            }).then(function successCallback(data){
+                goal.partnersGoals = $filter('currentAndFutureGoals')(data.data.rows);
+            }, function errorCallback(error){
+                console.log(error);
+            })
+        };
 
 
     });

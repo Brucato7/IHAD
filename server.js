@@ -62,3 +62,25 @@ app.route('/searchgoals')
 				response.send(result);
 			})
 	});
+
+app.route('/accountability')
+	.get(function(request, response){
+		database.getGoalsWithAccountabilityPartners(request.query.achiever_id,
+			function(result){
+				response.send(result);
+			})
+	})
+	.put(function(request, response){
+		database.updateAccountabilityPartner(request.query.goal_id, request.query.accountability_id,
+			function(result){
+				response.send(result);
+			})
+	});
+
+app.route('/encourage')
+	.get(function(request, response){
+		database.getGoalsWithAchievers(request.query.accountability_id,
+			function(result){
+				response.send(result);
+			})
+	});

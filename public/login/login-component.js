@@ -14,9 +14,10 @@ angular.module('ihadApp')
                         var uid = response.authResponse.userID;
                         if (response.authResponse) {
                         FB.api('/me',"get",{access_token: token, fields:'name,picture'}, function(response) {
-                        userData.name = response.name;
-                        userData.picURL = response.picture.data.url;
-                        ctrl.checkLogin(userData.name, response.id);
+                            userData.fb_id = response.id;
+                            userData.name = response.name;
+                            userData.picURL = response.picture.data.url;
+                            ctrl.checkLogin(userData.name, response.id);
                         });
                         } else {
                         console.log('User cancelled login or did not fully authorize.');
@@ -33,6 +34,7 @@ angular.module('ihadApp')
                         if(data.data.rowCount > 0){
                             userData.id = data.data.rows[0].id;
                             goalService.getUserGoals(userData.id);
+                            goalService.getPartnersGoals(userData.id);
                             $location.url('/activeuser');
                         } else {
                             ctrl.saveProfile(name, fbID);

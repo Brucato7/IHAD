@@ -23,7 +23,8 @@ angular.module('ihadApp')
                     checkin.currentCheckIns.push(data.data.rows[i]);
                 }
                 checkin.currentCheckIns = $filter('orderBy')(checkin.currentCheckIns, '-day');
-                checkin.currentStreak = checkin.calculateStreakByEndDate(checkin.currentCheckIns[0].day, 0);
+                var d = new Date();
+                checkin.currentStreak = checkin.calculateStreakByEndDate(d, 0);
                 checkin.findLongestStreak();
                 checkin.hideCheckInBtn = checkin.displayCheckInBtn();
             }, function errorCallback(error){
@@ -45,11 +46,12 @@ angular.module('ihadApp')
             var d = new Date(dateString);
             var day = d.getDate();
             var month = d.getMonth();
-            var year = d.getFullYear();
+            var year = d.getFullYear();            
             var checkInStreak = [];
-                        
+
             for(var i=startingIndex;i<this.currentCheckIns.length; i++){
                 var checkDay = new Date(this.currentCheckIns[i].day);
+                var checkMonth = checkDay.getMonth();
                 checkDay = checkDay.getDate();
                 if(day <= 0){
                     month--;
@@ -80,14 +82,18 @@ angular.module('ihadApp')
                             }
                     }
                 } //End of if day is less than or equal to 0
-
-                if(checkDay === day){
+            
+                if(checkDay === day && checkMonth === month){
                     checkInStreak.push(this.currentCheckIns[i]);
+                    day--;
+                } else if(i === 0){
+                    //do nothing because streak does not have to include current day
                     day--;
                 } else {
                     i = 9999999999;
                 }
             }
+
            return checkInStreak; 
         };
 

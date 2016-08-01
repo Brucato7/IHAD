@@ -26,6 +26,7 @@
         <div class="col-sm-10">
             <h3><img ng-src="{{user.picURL}}"> {{user.name}}</h3>
    	    </div>
+
     </div>
     <hr>
     <div class="row" style="background-color: #123456; color: #fff;">
@@ -75,9 +76,27 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date}}</p>
-            <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
-            <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date}}</p>
+                    <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
+                    <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
+                </div>
+            </div>
+            <h4>Encourage Others</h4>
+            <div class="row" ng-repeat="goal in goalService.partnersGoals">
+                <hr>
+                <div class="col-sm-4 text-center">
+                    <p ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)"><strong>{{goal.name | firstName}}</strong></p>
+                    <img ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)" ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
+                </div>
+                <div class="col-sm-8">                    
+                    <p>Working on {{goal.title}} goal.</p>
+                    <a ng-href="https://www.facebook.com/{{goal.fb_id}}" target="_blank">Visit {{goal.name | firstName}}'s Facebook</a>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
     <div class="row" style="background-color: #123456; color: #fff;">

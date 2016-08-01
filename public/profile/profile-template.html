@@ -28,7 +28,23 @@
     </div>
     <div class="row" style="background-color: #123456; color: #fff;">
         <div class="col-sm-2">
-           
+            <h4>Help {{viewProfile.name | firstName}}!</h4>
+            <div ng-repeat="goal in viewProfile.currentGoal">
+                <hr>
+                <button class="btn btn-default" ng-click="addAccountabilityPartner(goal)" ng-if="goal.accountability_partner_id === null">Help with {{goal.title}} goal.</button>
+                <div ng-if="goal.accountability_partner_id !== null">
+                    <img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
+                    <h5>{{goal.name | firstName}} is helping with the {{goal.title}} goal.</h5>
+                </div>
+            </div>
+            <div ng-repeat="goal in viewProfile.userGoals | futureGoals">
+                <hr>
+                <button class="btn btn-default" ng-click="addAccountabilityPartner(goal)" ng-if="goal.accountability_partner_id === null">Help with {{goal.title}} goal.</button>
+                <div ng-if="goal.accountability_partner_id !== null">
+                    <img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
+                    <h5>{{goal.name | firstName}} is helping with the {{goal.title}} goal.</h5>
+                </div>
+            </div>
         </div>
         <div class="col-sm-8 text-center" style="background-color: #fff; color: #123456; height: 440px;">
             <div class="row">
@@ -53,9 +69,9 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date}}</p>
-            <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
-            <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
+            <p><strong>Last Check In</strong>: {{viewProfile.userCheckIns[0].day | date}}</p>
+            <p><strong>Longest streak</strong>: {{viewProfile.userLongestCheckInStreak.length}} Days</p>
+            <p><strong>Current Streak</strong>: {{viewProfile.userCurrentCheckInStreak.length}} Days</p>
         </div>
     </div>
     <div class="row" style="background-color: #123456; color: #fff;">

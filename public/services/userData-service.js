@@ -5,4 +5,5 @@ angular.module('ihadApp')
         this.name = '';
         this.id = '';
         this.picURL = '';
+        this.fb_id = '';
     });
