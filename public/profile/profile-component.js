@@ -3,8 +3,9 @@
 angular.module('ihadApp')
     .component('profile', {
         templateUrl: 'profile/profile-template.html',
-        controller: ['$http','$routeParams', '$scope','userData','viewProfileService',
-            function($http, $routeParams, $scope, userData,viewProfileService){
+        controller: ['$http','$routeParams', '$scope','userData','viewProfileService','logoutService',
+            function($http, $routeParams, $scope, userData,viewProfileService, logoutService){
+                $scope.logout = logoutService.logout;
                 $scope.viewProfile = viewProfileService;
                 $scope.fb_id = $routeParams.fb_id;
                 $scope.user = userData;

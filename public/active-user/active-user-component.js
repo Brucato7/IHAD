@@ -3,8 +3,9 @@
 angular.module('ihadApp')
     .component("activeuser", {
         templateUrl: "active-user/active-user-template.html",
-        controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location','$window','viewProfileService',
-            function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location,$window,viewProfileService){
+        controller: ['userData','$scope', 'dateService','$http','goalService','$filter','checkInService','$location','$window','viewProfileService','logoutService',
+            function(userData, $scope, dateService, $http, goalService, $filter, checkInService,$location,$window,viewProfileService,logoutService){
+                $scope.logout = logoutService.logout;
                 $scope.viewProfile = viewProfileService;
                 $scope.checkInService = checkInService;
                 $scope.goalService = goalService;
@@ -75,14 +76,6 @@ angular.module('ihadApp')
                     })
                 };
 
-                $scope.logout = function(){
-                    FB.logout(function(response) {
-                        alert('You are now logged out!');
-                    });
-                    
-                    $location.url('/');
-                    $window.location.reload();
-                }
             }
         ]
     });
