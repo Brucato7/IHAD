@@ -21,6 +21,10 @@ angular.module('ihadApp')
                 $scope.searchByDescription = false;
 
                 $scope.showSearchBy = function(){
+                    $scope.search.$ = "";
+                    $scope.search.name = "";
+                    $scope.search.title = "";
+                    $scope.search.description = "";
                     switch($scope.searchBy){
                         case 'all':
                             $scope.searchByAll = true;

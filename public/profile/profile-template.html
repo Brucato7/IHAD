@@ -1,81 +1,95 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<nav class="navbar navbar-default navStyle">
+  <div class="container-fluid navMain">
 
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">IHAD</a>
+      <img class="navLogo" id="navLogo" src="img/ihad.png"  width="50px">
     </div>
 
     <ul class="nav navbar-nav">
-        <li><a href="#/search">Search</a></li>
-        <li><a href="#/activeuser">My Profile</a></li>
-        <li><a href="#/about">About</a></li>
+        <li class="navLinks" ><a href="#/search">Search</a></li>
+        <li class="navLinks" ><a href="#/activeuser">My Profile</a></li>
+        <li class="navLinks" ><a href="#/about">About</a></li>
     </ul>
     
     <ul class="nav navbar-nav navbar-right">
-        <li><a href="#/activeuser">{{user.name}}</a></li>
-        <li><img ng-src="{{user.picURL}}"></li>
-        <li><a href="" ng-click="logout()">Log Out</a></li>
+        <li class="navLinks" ><a href="#/activeuser">{{user.name}}</a></li>
+        <li class="navLinks" ><img ng-src="{{user.picURL}}"></li>
+        <li class="navLinks logout" ><a href="" ng-click="logout()">Log Out</a></li>
     </ul>
     
   </div>
 </nav>
 
-<div class="container">
-    <div class="row" style="background-color: #123456; color: #fff;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1">
+        </div>
         <div class="col-sm-10">
-            <h3><img ng-src="http://graph.facebook.com/{{fb_id}}/picture?type=square"> {{viewProfile.name}}</h3>
-   	    </div>
-    </div>
-    <div class="row" style="background-color: #123456; color: #fff;">
-        <div class="col-sm-2">
-            <h4>Help {{viewProfile.name | firstName}}!</h4>
-            <div ng-repeat="goal in viewProfile.currentGoal">
-                <hr>
-                <button class="btn btn-default" ng-click="addAccountabilityPartner(goal)" ng-if="goal.accountability_partner_id === null">Help with {{goal.title}} goal.</button>
-                <div ng-if="goal.accountability_partner_id !== null">
-                    <img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
-                    <h5>{{goal.name | firstName}} is helping with the {{goal.title}} goal.</h5>
-                </div>
-            </div>
-            <div ng-repeat="goal in viewProfile.userGoals | futureGoals">
-                <hr>
-                <button class="btn btn-default" ng-click="addAccountabilityPartner(goal)" ng-if="goal.accountability_partner_id === null">Help with {{goal.title}} goal.</button>
-                <div ng-if="goal.accountability_partner_id !== null">
-                    <img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
-                    <h5>{{goal.name | firstName}} is helping with the {{goal.title}} goal.</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8 text-center" style="background-color: #fff; color: #123456; height: 440px;">
             <div class="row">
-                <div ng-repeat="goal in viewProfile.currentGoal" class="col-sm-12">
-                    <h1>I'm going to spend an hour a day on {{goal.title}}</h1>
-                    <h3>{{goal.description}}</h3>
+                <div class="col-sm-12 headerDiv">
+                    <h3><img ng-src="http://graph.facebook.com/{{fb_id}}/picture?type=square"> {{viewProfile.name}}</h3>
+   	            </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12 dividerDiv">
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-sm-offset-2 col-sm-8 text-left">
-                    <h4>Future Goals</h4>
+                <div class="col-sm-2 text-center">
+                    <h4>Help {{viewProfile.name | firstName}}!</h4>
+                    <div ng-repeat="goal in viewProfile.currentGoal">
+                        <hr>
+                        <button class="btn btn-default" ng-click="addAccountabilityPartner(goal)" ng-if="goal.accountability_partner_id === null">Help with {{goal.title}} goal.</button>
+                        <div ng-if="goal.accountability_partner_id !== null">
+                            <img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
+                            <h5>{{goal.name | firstName}} is helping with the {{goal.title}} goal.</h5>
+                        </div>
+                    </div>
+
                     <div ng-repeat="goal in viewProfile.userGoals | futureGoals">
-                        <p><strong>{{goal.title}}</strong>: {{goal.description}} <span><strong>Starts</strong>: {{goal.start_date | date}}</span></p>
+                        <hr>
+                        <button class="btn btn-default" ng-click="addAccountabilityPartner(goal)" ng-if="goal.accountability_partner_id === null">Help with {{goal.title}} goal.</button>
+                        <div ng-if="goal.accountability_partner_id !== null">
+                            <img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
+                            <h5>{{goal.name | firstName}} is helping with the {{goal.title}} goal.</h5>
+                         </div>
                     </div>
                 </div>
-                <div class="col-sm-offset-2 col-sm-8 text-left">
-                    <h4>Completed Goals</h4>
-                    <div ng-repeat="goal in viewProfile.userGoals | pastGoals">
-                        <p><strong>{{goal.title}}</strong>: {{goal.description}} <span><strong>Ended</strong>: {{goal.end_date | date}}</span></p>
+
+                <div class="col-sm-8 text-center contentDiv">
+                    <div class="row">
+                        <div ng-repeat="goal in viewProfile.currentGoal" class="col-sm-12">
+                            <h1>I'm going to spend an hour a day on {{goal.title}}</h1>
+                            <h3>{{goal.description}}</h3>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-offset-2 col-sm-8 text-left">
+                            <h4>Future Goals</h4>
+                            <div ng-repeat="goal in viewProfile.userGoals | futureGoals">
+                                <p><strong>{{goal.title}}</strong>: {{goal.description}} <span><strong>Starts</strong>: {{goal.start_date | date}}</span></p>
+                            </div>
+                        </div>
+                        <div class="col-sm-offset-2 col-sm-8 text-left">
+                            <h4>Completed Goals</h4>
+                            <div ng-repeat="goal in viewProfile.userGoals | pastGoals">
+                                <p><strong>{{goal.title}}</strong>: {{goal.description}} <span><strong>Ended</strong>: {{goal.end_date | date}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <p><strong>Last Check In</strong>: {{viewProfile.userCheckIns[0].day | date}}</p>
+                    <p><strong>Longest streak</strong>: {{viewProfile.userLongestCheckInStreak.length}} Days</p>
+                    <p><strong>Current Streak</strong>: {{viewProfile.userCurrentCheckInStreak.length}} Days</p>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-2">
-            <p><strong>Last Check In</strong>: {{viewProfile.userCheckIns[0].day | date}}</p>
-            <p><strong>Longest streak</strong>: {{viewProfile.userLongestCheckInStreak.length}} Days</p>
-            <p><strong>Current Streak</strong>: {{viewProfile.userCurrentCheckInStreak.length}} Days</p>
-        </div>
-    </div>
-    <div class="row" style="background-color: #123456; color: #fff;">
-        <div class="col-sm-12" style="height: 15px;">
+            <div class="row">
+                <div class="col-sm-12 dividerDiv">
+                </div>
+            </div>
         </div>
     </div>
 </div>
