@@ -82,7 +82,7 @@ angular.module('ihadApp')
                     }
                     return goals;
                 }
-                
+
                 $scope.getAllGoals();
             }
         ]

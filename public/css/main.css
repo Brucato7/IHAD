@@ -1,54 +1,30 @@
+/*++++++++++++++++++ Default Styles +++++++++++++++++*/
+
 * {
-   font-family: Verdana, Geneva, sans-serif; 
+   font-family: Verdana, Geneva, sans-serif;
 }
 
 body {
-    
+    background-color: #0a764d;
 }
 
+
+/*++++++++++++++++++ NavBar Styles +++++++++++++++++*/
+
+#navLogo {
+  height: 2.7em;
+  width: auto;
+  margin-left: 20px;
+}
 .navStyle {
-    background-color: #36B0FF;
+    background-color: #0a764d;
     border: none;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;;
+    border-radius: 0px;
+    margin-bottom: 0px;
 }
 
 .nav ul{
     color: #fff;
-}
-
-.contentDiv {
-    background-color: #fff;
-    border: 5px solid rgba(165, 219, 255, 0.5);
-    border-radius: 25px;
-}
-
-.contentDiv p{
-    font-size: 1vmax;
-}
-
-.headerText {
-    color: #22343F;
-    text-decoration: underline;
-}
-
-.loginBtn {
-    background-color: #ffa12a;
-    border-radius: 15px;
-    font-size: 1vmax;
-    color: #fff;
-    padding: 10px
-}
-
-.loginBtn:hover {
-    background-color: #fff;
-    color: #ffa12a;
-}
-.loginBtn:active {
-    border: none;
-}
-#navLogo {
-    margin-left: 20px;
 }
 
 .navLinks{
@@ -66,24 +42,159 @@ body {
 }
 
 .navLinks:hover{
-    background-color: #ffa12a;
-    border-radius: 25px;
+    text-shadow: 0 0 5px #f285a2;
+}
+
+/*++++++++++++++++++ Body Styles +++++++++++++++++*/
+
+.jumbotron{
+  background-image: url("../img/succeedGreen.jpg");
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: -40px;
+  margin-bottom: 0;
+  padding: 50px;
+  text-align: center;
+}
+
+.jumbotron .jumboText {
+  color: #d22b58;
+  text-shadow: 1px 1px 2px #fac3d2;
+}
+#jumboText3{
+  font-size: 1.7em;
+}
+#jumboText2{
+  font-size: 1.9em;
+}
+#jumboText1{
+  font-size: 2.1em;
+}
+
+.contentDiv {
+  margin-top: 0px;
+  background-color: #73d2ae;
+  padding: 100px 0;
+}
+
+#bodyContent{
+  height: 70%;
+}
+
+#achieveImage,
+#timeImage {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  height: 10em;
+  width: auto;
+}
+#bodyLogo{
+  height: 5em;
+}
+
+.contentDiv p,
+.contentDiv ul li{
+    font-size: 18px;
+}
+
+.headerText {
+    color: #22343F;
+    font-size: 2em;
+    text-decoration: underline;
+}
+#profileHead{
+  margin-top:0px;
+}
+.headerDiv{
+    background-color: #73d2ae;
+    color: #000;
+}
+
+.dividerDiv {
+    background-color: #ffcf8c;
+    height: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#profileSideBar{
+  color: #fff;
+  background-color: #42b287;
+  padding: 25px 10px;
+}
+
+#profileContentDiv{
+  background-color: #baefdb;
+  padding-bottom: 50px;
+}
+
+.searchResultsDiv{
+  background-color: #baefdb;
+  color: #000;
+}
+#searchTitle{
+  text-align: center;
+  margin: 25px 0px;
+}
+#helpDiv{
+  color:#fff;
+}
+#helpDiv a{
+  color: #e95679;
+  text-shadow: 1px 1px #000;
+}
+
+  /*++++++++++ Form Styles +++++++*/
+  #formDiv{
+    color: #fff;
+  }
+  #formDiv label:hover,
+  #formDiv h4:hover{
+    color: #fac3d2;
+  }
+
+/*++++++++++++++++++ Login Logout Styles +++++++++++++++++*/
+#FBLogin{
+  margin: 75px 0px;
+}
+.loginBtn {
+    background-color: #e89c30;
+    border-radius: 10px;
+    font-size: 18px;
+    color: #fff;
+    padding: 20px;
+}
+
+.loginBtn:hover {
+    background-color: #e89c30;
+    color: #fff;
+    text-shadow:0 0 3px #e9567d;
+}
+.loginBtn:active {
 }
 
 .logout {
     margin-right: 20px;
 }
 
-.headerDiv{
-    background-color: #A5DBFF;
-    color: #22343f;
-    border-radius: 25px;
-} 
-
-.dividerDiv {
-    background-color: #ffa12a;
-    border-radius: 25px;
-    height: 5px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+/*++++++++++++++++ MEDIA QUERY for sm-lg screens ++++++++++++++++++*/
+@media only screen and (min-width: 768px){
+  /*++++++++++++++++++ Body Styles +++++++++++++++++*/
+  .jumbotron{
+    text-align: left;
+  }
+  .jumbotron .jumboText {
+    margin-top: 50px;
+  }
+  #jumboText3{
+    font-size: 2em;
+  }
+  #jumboText2{
+    font-size: 3em;
+  }
+  #jumboText1{
+    font-size: 4em;
+  }
 }
+
+/*++++++++++++++++ MEDIA QUERY for lg screens ++++++++++++++++++*/

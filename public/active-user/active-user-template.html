@@ -1,114 +1,132 @@
 <nav class="navbar navbar-default navStyle">
   <div class="container-fluid navMain">
-
-    <div class="navbar-header">
-      <img class="navLogo" id="navLogo" src="img/ihad.png"  width="50px">
-    </div>
-
     <ul class="nav navbar-nav">
+        <li><a href="#"><img class="navLogo" id="navLogo" src="img/logoPink2.png"  width="50px"></a></li>
         <li class="navLinks" ><a href="#/search">Search</a></li>
         <li class="navLinks" ><a href="#/activeuser">My Profile</a></li>
         <li class="navLinks" ><a href="#/about">About</a></li>
     </ul>
-    
     <ul class="nav navbar-nav navbar-right">
-        <li class="navLinks" ><a href="#/activeuser">{{user.name}}</a></li>
-        <li class="navLinks" ><img ng-src="{{user.picURL}}"></li>
-        <li class="navLinks logout" ><a href="" ng-click="logout()">Log Out</a></li>
+      <li class="navLinks" ><a href="#/activeuser">{{user.name}}</a></li>
+      <li class="navLinks" ><img ng-src="{{user.picURL}}"></li>
+      <li class="navLinks logout" ><a href="" ng-click="logout()">Log Out</a></li>
     </ul>
-    
   </div>
 </nav>
 
+<div id="profileHead" class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 headerDiv">
+      <div class="row">
+        <div class="col-sm-offset-1 col-sm-10">
+          <h3><img ng-src="{{user.picURL}}"> {{user.name}}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div id="formDiv" class="col-sm-12">
+      <h4 ng-click="setMinMaxStartDate(); showGoalForm = !showGoalForm;">Create New Goal <span ng-show="!showGoalForm" class="glyphicon glyphicon-menu-down"></span><span ng-show="showGoalForm" class="glyphicon glyphicon-menu-up"></span></h4>
+      <div ng-show="showGoalForm">
+        <p class="text-danger"><strong>{{goalTimeError}}</strong></p>
+        <form role="form" ng-submit="saveGoal()">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="title">Goal Title:</label>
+                <input id="title" ng-model='title' type="text" class="form-control" placeholder="What is your goal?" required>
+              </div>
+              <div class="form-group">
+                <label for="goal">Goal Description:</label>
+                <textarea id="goal" ng-model='goal' type="text" class="form-control" rows="4" maxlength="120" placeholder="What is your goal?" style="resize: none;" required></textarea>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input id="startDate" type="date" ng-model='startDate' class="form-control" placeholder="yyyy-MM-dd" min='{{currentDate}}' max='{{maxStartDate}}' required>
+              </div>
+              <div class="form-group">
+                <label for="Months">Number of Months:</label>
+                <select id="months" class="form-control" ng-model="months" required>
+                  <option ng-repeat="month in ['1','2','3','4','5','6','7','8','9','10','11','12']">{{month}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <button id="createGoalBtn" type="submit" class="btn btn-default">Create Goal</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-1">
-        </div>
-        <div class="col-sm-10">
-
-            <div class="row">
-                <div class="col-sm-12 headerDiv">
-                    <h3><img ng-src="{{user.picURL}}"> {{user.name}}</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 dividerDiv">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-2">
-                    <h4 ng-click="setMinMaxStartDate(); showGoalForm = !showGoalForm;">Create New Goal <span ng-show="!showGoalForm" class="glyphicon glyphicon-menu-down"></span><span ng-show="showGoalForm" class="glyphicon glyphicon-menu-up"></span></h4>
-                    <div ng-show="showGoalForm">
-                        <form role="form" ng-submit="saveGoal()">
-                            <div class="form-group">
-                                <label for="title">Goal Title:</label>
-                                <input id="title" ng-model='title'' type="text" class="form-control" placeholder="What is your goal?" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="goal">Goal Description:</label>
-                                <textarea id="goal" ng-model='goal' type="text" class="form-control" rows="4" maxlength="120" placeholder="What is your goal?" style="resize: none;" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="startDate">Start Date:</label>
-                                <input id="startDate" type="date" ng-model='startDate' class="form-control" placeholder="yyyy-MM-dd" min='{{currentDate}}' max='{{maxStartDate}}' required>
-                            </div>
-                            <div class="form-group">
-                                <label for="Months">Number of Months:</label>
-                                <select id="months" class="form-control" ng-model="months" required>
-                                    <option ng-repeat="month in ['1','2','3','4','5','6','7','8','9','10','11','12']">{{month}}</option>
-                                </select>
-                            </div>
-                            <p class="text-danger"><strong>{{goalTimeError}}</strong></p>
-                            <button type="submit" class="btn btn-default">Create Goal</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-sm-8 text-center contentDiv">
-                    <div class="row">
-                        <div ng-repeat="goal in goalService.currentGoal" class="col-sm-12">
-                            <h1>I'm going to spend an hour a day on {{goal.title}}</h1>
-                            <h3>{{goal.description}}</h3>
-                            <button class="btn btn-primary loginBtn" ng-click="saveCheckIn()" ng-hide="checkInService.hideCheckInBtn">Check in for today!</button>
-                            <h4 class="text-success" ng-show="checkInService.hideCheckInBtn">Today's hour is already complete!</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-offset-2 col-sm-8 text-left">
-                            <h4>Future Goals</h4>
-                            <div ng-repeat="goal in goalService.userGoalsArray | futureGoals">
-                                <p><strong>{{goal.title}}</strong>: {{goal.description}} <span><strong>Starts</strong>: {{goal.start_date | date}}</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date}}</p>
-                            <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
-                            <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
-                        </div>
-                    </div>
-                    <h4>Encourage Others</h4>
-                    <div class="row" ng-repeat="goal in goalService.partnersGoals">
-                        <hr>
-                        <div class="col-sm-4 text-center">
-                            <p ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)"><strong>{{goal.name | firstName}}</strong></p>
-                            <img ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)" ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
-                        </div>
-                        <div class="col-sm-8">                    
-                            <p>Working on {{goal.title}} goal.</p>
-                            <a ng-href="https://www.facebook.com/{{goal.fb_id}}" target="_blank">Visit {{goal.name | firstName}}'s Facebook</a>
-                        </div>
-                    </div>        
-                </div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-sm-12 dividerDiv">
     </div>
-    <div class="row">
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div id="profileSideBar" class="col-sm-push-9 col-sm-3">
+      <div class="row">
         <div class="col-sm-12">
+          <p><strong>Last Check In</strong>: {{checkInService.currentCheckIns[0].day | date}}</p>
+          <p><strong>Longest streak</strong>: {{checkInService.longestStreak.length}} Days</p>
+          <p><strong>Current Streak</strong>: {{checkInService.currentStreak.length}} Days</p>
         </div>
+      </div>
     </div>
+    <div id="profileContentDiv" class="col-sm-pull-3 col-sm-9 text-center contentDiv">
+      <div class="row">
+        <div ng-repeat="goal in goalService.currentGoal" class="col-sm-12">
+          <h1>Current Goal: {{goal.title}}</h1>
+          <h3>{{goal.description}}</h3>
+          <button class="btn btn-primary loginBtn" ng-click="saveCheckIn()" ng-hide="checkInService.hideCheckInBtn">Check in for today!</button>
+          <h4 class="text-success" ng-show="checkInService.hideCheckInBtn">Today's hour is already complete!</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-offset-2 col-sm-8 text-left">
+          <h4>Future Goals</h4>
+          <div ng-repeat="goal in goalService.userGoalsArray | futureGoals">
+            <p><strong>{{goal.title}}</strong>: {{goal.description}} <span><strong>Starts</strong>: {{goal.start_date | date}}</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-12 dividerDiv">
+      </div>
+  </div>
+</div>
+
+<div id="helpDiv" class="container">
+  <div class="row text-center">
+    <h4>Encourage Others</h4>
+    <div class="col-sm-4" ng-repeat="goal in goalService.partnersGoals">
+      <div class="row">
+        <div class="col-sm-4 text-center">
+          <p ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)"><strong>{{goal.name | firstName}}</strong></p>
+          <img ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)" ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square">
+        </div>
+        <div class="col-sm-8">
+          <br>
+          <p>Working on {{goal.title}} goal.</p>
+          <a ng-href="https://www.facebook.com/{{goal.fb_id}}" target="_blank">Visit {{goal.name | firstName}}'s Facebook</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,31 +1,26 @@
 <nav class="navbar navbar-default navStyle">
   <div class="container-fluid navMain">
-
-    <div class="navbar-header">
-      <img class="navLogo" id="navLogo" src="img/ihad.png"  width="50px">
-    </div>
-
     <ul class="nav navbar-nav">
+        <li><a href="#"><img class="navLogo" id="navLogo" src="img/logoPink2.png"  width="50px"></a></li>
         <li class="navLinks" ><a href="#/search">Search</a></li>
         <li class="navLinks" ><a href="#/activeuser">My Profile</a></li>
         <li class="navLinks" ><a href="#/about">About</a></li>
     </ul>
-    
     <ul class="nav navbar-nav navbar-right">
-        <li class="navLinks" ><a href="#/activeuser">{{user.name}}</a></li>
-        <li class="navLinks" ><img ng-src="{{user.picURL}}"></li>
-        <li class="navLinks logout" ><a href="" ng-click="logout()">Log Out</a></li>
+      <li class="navLinks" ><a href="#/activeuser">{{user.name}}</a></li>
+      <li class="navLinks" ><img ng-src="{{user.picURL}}"></li>
+      <li class="navLinks logout" ><a href="" ng-click="logout()">Log Out</a></li>
     </ul>
-    
   </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container searchResultsDiv">
     <div class="row">
         <div class="col-sm-2">
         </div>
 
         <div class="col-sm-8">
+          <h2 id="searchTitle">See what other people are achieving.</h2>
             <div class="row">
                 <div class="col-sm-offset-1 col-sm-4">
                     <label for="search">Search: </label>
@@ -69,7 +64,7 @@
             </div>
 
             <div class="row">
-                <div class="col-sm-offset-1 col-sm-10">
+                <div class="col-sm-12">
                     <h4>Results</h4>
                     <table class="table">
                         <tr>
@@ -81,19 +76,18 @@
                         </tr>
 
                         <tr ng-repeat="goal in getGoalView() | filter:search | orderBy: sortBy">
-                            <td><a ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)"><img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square"></a></td>
-                            <td><a ng-click="viewProfile.viewUserProfile(goal.id,goal.name,goal.fb_id)">{{goal.name}}</a></td>
+                            <td><a ng-click="viewProfile.viewUserProfile(goal.achiever_id,goal.name,goal.fb_id)"><img ng-src="http://graph.facebook.com/{{goal.fb_id}}/picture?type=square"></a></td>
+                            <td><a ng-click="viewProfile.viewUserProfile(goal.achiever_id,goal.name,goal.fb_id)">{{goal.name}}</a></td>
                             <td>{{goal.title}}</td>
-                            <td>{{goal.description | limitTo: 25}}</td>
+                            <td>{{goal.description | limitTo: 35}}</td>
                             <td>{{goal.start_date | date}}</td>
                         </tr>
                     </table>
                 </div>
-            </div>            
+            </div>
         </div>
 
         <div class="col-sm-2">
         </div>
-    </div>    
+    </div>
 </div>
-

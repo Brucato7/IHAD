@@ -12,7 +12,7 @@ angular.module('ihadApp')
 
                 $scope.addAccountabilityPartner = function(goal){
                     goal.name = userData.name;
-                    goal.accountability_partner_id = userData.id;
+                    goal.accountability_id = userData.id;
                     goal.fb_id = userData.fb_id;
                     $http({
                         method: 'PUT',

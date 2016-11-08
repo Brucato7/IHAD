@@ -18,6 +18,28 @@ angular.module('ihadApp')
             if(month < 10){
                 month = "0"+month;
             }
+            switch(month){
+              case 4:
+              case 6:
+              case 9:
+              case 11:
+                if(day > 30){
+                  day = day - 30;
+                };
+                break;
+              case 2:
+              if(year%4 === 0){
+                if(day > 29){
+                  day = day - 29;
+                }
+              }else if(day > 28){
+                day = day - 28;
+              };
+              break;
+
+
+
+            }
             if(day < 10){
                 day = "0"+day;
             }

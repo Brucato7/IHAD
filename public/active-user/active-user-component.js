@@ -15,14 +15,14 @@ angular.module('ihadApp')
                 $scope.startDate;
                 $scope.months = "1";
                 $scope.currentDate = dateService.yyyymmddDateFormat(0,0);
-                $scope.maxStartDate = dateService.yyyymmddDateFormat(1,0);                
+                $scope.maxStartDate = dateService.yyyymmddDateFormat(1,0);
                 $scope.showGoalForm = false;
                 $scope.goalTimeError = '';
 
                 $scope.toggleGoalForm = function(){
                     $scope.showGoalForm = !$scope.showGoalForm;
                 };
-               
+
                 $scope.saveGoal = function(){
                     var start = dateService.yyyymmddDateFormat(0,0,$scope.startDate);
                     var end = dateService.yyyymmddDateFormat(0,$scope.months,$scope.startDate);
@@ -66,11 +66,7 @@ angular.module('ihadApp')
                         url: '/checkin',
                         params: {day: date, goal_id: goal_id}
                     }).then(function successCallback(data){
-                        checkInService.currentCheckIns.push(data.data.rows[0]);
-                        checkInService.currentCheckIns = $filter('orderBy')(checkInService.currentCheckIns, '-day');
-                        checkInService.currentStreak = checkInService.calculateStreakByEndDate(checkInService.currentCheckIns[0].day, 0);
-                        checkInService.findLongestStreak();
-                        checkInService.hideCheckInBtn = checkInService.displayCheckInBtn();
+                        checkInService.getCheckIns(goal_id);
                     }, function errorCallback(error){
                         console.log(error);
                     })
